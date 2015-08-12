@@ -8,6 +8,16 @@ var autoPrefix = new LessPluginAutoPrefix({ browsers: ["last 20 versions"] });
 var connect = require('gulp-connect');
 var changed = require('gulp-changed');
 
+var watch = require('gulp-watch');
+
+function swallowError (error) {
+
+    //If you want details of the error in the console
+    console.log(error.toString());
+
+    this.emit('end');
+}
+
 // Static Server + watching scss/html files, sync all stuffs
 gulp.task('serve', ['jade', 'less'], function() {
 
@@ -16,7 +26,8 @@ gulp.task('serve', ['jade', 'less'], function() {
             baseDir: "./dist/html",
             directory: true,
             routes: {
-                "/assets": "./dist/assets"
+                "/assets": "./dist/assets",
+                "/libs": "./dist/libs"
             }
         },
 
@@ -44,8 +55,12 @@ gulp.task('connect', function() {
 
 // Watch
 gulp.task('watch', ['jade', 'less'], function() {
-  gulp.watch("./src/jade/**/*.jade", ['jade']);
-  gulp.watch("./src/less/**/*.less", ['less']);
+  //gulp.watch("./src/jade/**/*.jade", ['jade']);
+  //gulp.watch("./src/less/**/*.less", ['less']);
+
+  watch('./src/jade/**/*.jade', function() { gulp.start('jade'); });
+  watch('./src/less/**/*.less', function() { gulp.start('less'); });
+  
 });
 
 // Jade
@@ -59,10 +74,11 @@ gulp.task('jade', function() {
   var dest = './dist/html';
 
     gulp.src(src)
-        .pipe(changed(dest))
+        .pipe(changed(dest, {extension: '.html'}))
         .pipe(jade({
             pretty: true
         }))
+        .on('error', swallowError)
         .pipe(gulp.dest(dest))
 });
 
@@ -76,11 +92,12 @@ gulp.task('less', function() {
     var dest = './dist/assets/css';
 
     gulp.src(src)
-        .pipe(changed(dest))
+        .pipe(changed(dest, {extension: '.css'}))
         .pipe(less({
             paths: ['./src/less/**/includes'],
             plugins: [autoPrefix],
         }))
+        .on('error', swallowError)
         .pipe(gulp.dest(dest));
 });
 
