@@ -130,7 +130,7 @@ gulp.task('less', function() {
     var dest = './dist/assets/css';
 
     gulp.src(src)
-        .pipe(changed(dest, {extension: '.css'}))
+        //.pipe(changed(dest, {extension: '.css'}))
         .pipe(less({
             paths: ['./src/less/**/includes'],
             plugins: [autoPrefix],
