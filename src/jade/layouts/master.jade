@@ -1,6 +1,45 @@
-html
-	head
-		link(rel="stylesheet", type="text/css", href="assets/css/main.css")
-	body
-		block content
-		h1 DCM NHE HAHAHAHAH HOHOHO
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='description', content='')
+        meta(name='author', content='')
+        meta(name='copyright', content='Copyright (c) 2015 Photoring')
+        link(rel='shortcut icon', href='/bootstrap-3.3.1/assets/ico/favicon.png')
+
+        title WeeLink
+
+        //- Bootstrap core CSS
+        link(href='../../libs/bootstrap/css/bootstrap.css', rel='stylesheet')
+        //- Font Awesome core CSS
+        link(href='../../libs/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+        //- Date Picker
+        link(href='../../libs/bootstrap-datepicker-1.4.0-dist/css/bootstrap-datepicker3.min.css', rel='stylesheet')
+        
+        //- Main css
+        link(href='../../assets/css/main.css', rel='stylesheet')
+
+        //- Style block
+        block css
+
+        //- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+        //- if lt IE 9
+        script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+        script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+    body
+
+        include ../includes/user.nav.jade
+
+        //- Contents block
+        block content
+
+        include ../includes/user.footer.jade
+
+        script(src='../../libs/jquery/jquery-2.1.4.min.js')
+        script(src='../../libs/bootstrap/js/bootstrap.min.js')
+        script(src='../../libs/bootstrap-datepicker-1.4.0-dist/js/bootstrap-datepicker.min.js')
+        script(src='../../libs/bootstrap-datepicker-1.4.0-dist/locales/bootstrap-datepicker.kr.min.js')
+        script(src='../../assets/js/main.js')
+        //- Specific scripts block
+        block js
