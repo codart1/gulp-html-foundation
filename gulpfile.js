@@ -53,8 +53,7 @@ gulp.task('serve', ['jade', 'less'], function() {
 // Static server without watching
 gulp.task('connect', function() {
   connect.server({
-    root: ['./dist/html', './dist'],
-    port: 80,
+    root: ['./dist/html', './dist']
   });
 });
 
